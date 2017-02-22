@@ -18,15 +18,6 @@ namespace MVC5_ADO_tutorial.Controllers
     {
 
 
-        //private SqlConnection con;
-        //private void connection()
-        //{
-        //    string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
-        //    con = new SqlConnection(constr);
-
-        //}
-
-
         ///<summary>  
         ///Action method which  
         ///insert the data into database by capturing  
@@ -38,18 +29,7 @@ namespace MVC5_ADO_tutorial.Controllers
 
             if (ModelState.IsValid)
             {
-                /*
-                connection();
-                SqlCommand com = new SqlCommand("InsertData", con);
-                com.CommandType = CommandType.StoredProcedure;
-                com.Parameters.AddWithValue("@FName", Emp.FName);
-                com.Parameters.AddWithValue("@MName", Emp.MName);
-                com.Parameters.AddWithValue("@LName", Emp.LName);
-                com.Parameters.AddWithValue("@EmailId", Emp.EmailId);
-                con.Open();
-                int i = com.ExecuteNonQuery();
-                con.Close();
-                */
+
                 string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
                 EmployeeDAC employeeDAC = new EmployeeDAC(constr);
                 int i = employeeDAC.AddNewRecord(Emp);
@@ -58,7 +38,6 @@ namespace MVC5_ADO_tutorial.Controllers
                 {
                     ViewBag.Message = "New Employee Added Successfully";
                 }
-
 
             }
             ModelState.Clear();
