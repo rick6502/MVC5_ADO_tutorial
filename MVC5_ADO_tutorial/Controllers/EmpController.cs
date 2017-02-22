@@ -10,19 +10,21 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
+using MVC5_ADO_tutorial.DAC;
+
 namespace MVC5_ADO_tutorial.Controllers
 {
     public class EmpController : Controller
     {
 
 
-        private SqlConnection con;
-        private void connection()
-        {
-            string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
-            con = new SqlConnection(constr);
+        //private SqlConnection con;
+        //private void connection()
+        //{
+        //    string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
+        //    con = new SqlConnection(constr);
 
-        }
+        //}
 
 
         ///<summary>  
@@ -36,6 +38,7 @@ namespace MVC5_ADO_tutorial.Controllers
 
             if (ModelState.IsValid)
             {
+                /*
                 connection();
                 SqlCommand com = new SqlCommand("InsertData", con);
                 com.CommandType = CommandType.StoredProcedure;
@@ -46,10 +49,15 @@ namespace MVC5_ADO_tutorial.Controllers
                 con.Open();
                 int i = com.ExecuteNonQuery();
                 con.Close();
+                */
+                string constr = ConfigurationManager.ConnectionStrings["getconn"].ToString();
+                EmployeeDAC employeeDAC = new EmployeeDAC(constr);
+                int i = employeeDAC.AddNewRecord(Emp);
+
                 if (i >= 1)
                 {
                     ViewBag.Message = "New Employee Added Successfully";
-                                    }
+                }
 
 
             }
